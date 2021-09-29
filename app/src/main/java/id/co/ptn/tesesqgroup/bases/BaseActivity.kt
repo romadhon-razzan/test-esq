@@ -13,4 +13,9 @@ open class BaseActivity : AppCompatActivity() {
     fun showSnackBar(view: View, message: String) {
         Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
     }
+
+    fun loading(view: View, loading: Boolean) {
+        if (loading) view.visibility = View.VISIBLE
+        else view.visibility = View.GONE
+    }
 }

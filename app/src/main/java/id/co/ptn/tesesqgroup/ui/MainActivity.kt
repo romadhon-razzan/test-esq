@@ -3,7 +3,6 @@ package id.co.ptn.tesesqgroup.ui
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseActivity
@@ -27,15 +26,16 @@ class MainActivity : BaseActivity() {
     }
 
     private fun setObserve() {
-        viewModel.reqCocktail().observe(this, Observer {
+        viewModel.reqCocktail().observe(this, {
             when (it.status) {
                 Status.SUCCESS -> {
-
+                    loading(binding.progressBar, false)
                 }
                 Status.LOADING -> {
-
+                    loading(binding.progressBar, true)
                 }
                 Status.ERROR -> {
+                    loading(binding.progressBar, false)
                     showSnackBar(binding.container,"Error Apps")
                 }
             }
