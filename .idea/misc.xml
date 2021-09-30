@@ -5,9 +5,12 @@
       <map>
         <entry key="..\:/Projects/Androids/Tes Masuk Kerja/test-esq/app/src/main/res/layout/activity_main.xml" value="0.1" />
         <entry key="..\:/Users/user/AndroidStudioProjects/TesESQGroup/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.10729166666666666" />
+        <entry key="app/src/main/res/layout/cocktail_list_fragment.xml" value="0.25" />
       </map>
     </option>
   </component>
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
