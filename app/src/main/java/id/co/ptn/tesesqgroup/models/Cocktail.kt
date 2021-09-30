@@ -1,4 +1,7 @@
 package id.co.ptn.tesesqgroup.models
 
-class Cocktail {
-}
+import com.google.gson.annotations.SerializedName
+
+data class Cocktail (
+    @SerializedName("drinks") var drinks : List<Drinks>
+    )
