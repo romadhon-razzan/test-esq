@@ -7,31 +7,23 @@
         style="@style/LayoutMatchParent"
         tools:context=".ui.cocktail.CocktailListFragment">
 
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_margin="@dimen/medium"
-            app:cardCornerRadius="@dimen/radius_normal"
-            app:cardElevation="@dimen/elevation_normal">
-
-            <RelativeLayout
-                style="@style/LayoutMatchParent">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/et_search_by_name"
-                    style="@style/LayoutMatchParent"
-                    android:paddingStart="@dimen/medium"
-                    android:paddingEnd="@dimen/medium"
-                    android:background="@color/transparent"
-                    android:drawableStart="@android:drawable/ic_menu_search"
-                    android:drawablePadding="@dimen/normal"
-                    android:hint="@string/label_search_your_drink"/>
-            </RelativeLayout>
-
-        </com.google.android.material.card.MaterialCardView>
+        <include
+            android:id="@+id/container_search"
+            layout="@layout/container_search"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view"
-            style="@style/LayoutMatchWrapParent"/>
+            style="@style/LayoutMatchWrapParent"
+            tools:listitem="@layout/item_cocktail"/>
+
+        <RelativeLayout
+            style="@style/LayoutWrap"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true">
+            <include
+                android:id="@+id/container_filter_sort"
+                layout="@layout/container_filter_sort"/>
+        </RelativeLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"

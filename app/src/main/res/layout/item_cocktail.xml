@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <com.google.android.material.card.MaterialCardView
+        style="@style/LayoutMatchWrapParent"
+        android:layout_marginStart="@dimen/medium"
+        android:layout_marginEnd="@dimen/medium"
+        android:layout_marginTop="@dimen/medium"
+        app:cardElevation="@dimen/elevation_normal">
+
+        <RelativeLayout
+            style="@style/LayoutMatchWrapParent">
+            <ImageView
+                android:id="@+id/image"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                tools:src="@tools:sample/avatars"/>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_drink_name"
+                android:layout_toEndOf="@id/image"
+                style="@style/LayoutWrap"
+                android:padding="@dimen/medium"
+                tools:text="Lemon Tea"/>
+        </RelativeLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
