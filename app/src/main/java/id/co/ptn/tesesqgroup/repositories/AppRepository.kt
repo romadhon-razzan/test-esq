@@ -5,4 +5,5 @@ import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val apiHelper: ApiHelper) {
     suspend fun getCocktails() =  apiHelper.getCocktails()
+    suspend fun getRandom() =  apiHelper.getRandom()
 }

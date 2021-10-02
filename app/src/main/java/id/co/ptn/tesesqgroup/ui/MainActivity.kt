@@ -8,7 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseActivity
 import id.co.ptn.tesesqgroup.databinding.ActivityMainBinding
-import id.co.ptn.tesesqgroup.ui.cocktail.CocktailListFragment
+import id.co.ptn.tesesqgroup.ui.drink.HomeDrinkFragment
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity() {
@@ -23,7 +23,7 @@ class MainActivity : BaseActivity() {
         if (savedInstanceState == null) {
             supportFragmentManager.commit {
                 setReorderingAllowed(true)
-                add<CocktailListFragment>(R.id.container)
+                add<HomeDrinkFragment>(R.id.container)
             }
         }
 

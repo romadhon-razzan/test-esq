@@ -3,4 +3,5 @@
     <dimen name="radius_normal">6dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>
     <dimen name="container_search_height">50dp</dimen>
+    <dimen name="item_drink_size">150dp</dimen>
 </resources>
