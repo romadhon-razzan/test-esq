@@ -3,6 +3,19 @@
     <dimen name="radius_normal">6dp</dimen>
     <dimen name="elevation_normal">4dp</dimen>
     <dimen name="container_search_height">50dp</dimen>
+    <dimen name="toolbar_height">55dp</dimen>
     <dimen name="item_drink_size">150dp</dimen>
     <dimen name="item_popular_drink_size">200dp</dimen>
+
+    <dimen name="small">10dp</dimen>
+    <dimen name="normal">14dp</dimen>
+    <dimen name="medium">16dp</dimen>
+    <dimen name="large">20dp</dimen>
+
+    <dimen name="font_small">10sp</dimen>
+    <dimen name="font_normal">14sp</dimen>
+    <dimen name="font_medium">16sp</dimen>
+    <dimen name="font_large">20sp</dimen>
+
+
 </resources>

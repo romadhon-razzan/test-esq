@@ -13,4 +13,10 @@ interface Services {
 
     @GET(GET_RANDOM)
     suspend fun getRandom(): Response<DrinkResponse>
+
+    @GET(SEARCH_NAME)
+    suspend fun searchName( @Query("s") s: String): Response<DrinkResponse>
+
+    @GET(GET_RECENT)
+    suspend fun getRecent(): Response<DrinkResponse>
 }

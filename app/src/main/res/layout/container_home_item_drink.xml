@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/container"
         style="@style/LayoutMatchParentWrapContent"
         android:layout_marginStart="@dimen/medium"
         android:layout_marginEnd="@dimen/medium"

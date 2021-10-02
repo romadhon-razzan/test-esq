@@ -7,4 +7,6 @@ class AppRepository @Inject constructor(private val apiHelper: ApiHelper) {
     suspend fun getCocktails() =  apiHelper.getCocktails()
     suspend fun getPopular() =  apiHelper.getPopular()
     suspend fun getRandom() =  apiHelper.getRandom()
+    suspend fun searchName(s: String) =  apiHelper.searchName(s)
+    suspend fun getRecent() =  apiHelper.getRecent()
 }

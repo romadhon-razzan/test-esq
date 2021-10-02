@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/toolbar_height"
+        android:paddingStart="@dimen/small"
+        android:paddingEnd="@dimen/medium">
+
+        <ImageButton
+            android:id="@+id/bt_back"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="@dimen/small"
+            android:background="@color/transparent"
+            android:src="@drawable/ic_back"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/search_by_name"
+            android:layout_toEndOf="@id/bt_back"
+            android:layout_toStartOf="@id/bt_filter"
+            style="@style/LayoutMatchParent"
+            android:gravity="center_vertical"
+            android:singleLine="true"
+            android:textSize="@dimen/font_normal"
+            android:hint="@string/label_search_your_drink"/>
+
+        <ProgressBar
+            android:id="@+id/progress_bar_search"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_toStartOf="@id/bt_filter"
+            android:layout_centerVertical="true"
+            android:visibility="gone"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/bt_filter"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:paddingStart="@dimen/normal"
+            android:paddingEnd="@dimen/normal"
+            android:gravity="center"
+            android:textColor="@color/purple_500"
+            android:text="Filter"/>
+    </RelativeLayout>
+</layout>

@@ -10,26 +10,24 @@ import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
 import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.models.HomeDrinkType
-import id.co.ptn.tesesqgroup.ui.drink.holder.DrinksHolder
-import id.co.ptn.tesesqgroup.ui.drink.holder.PopularHolder
-import id.co.ptn.tesesqgroup.ui.drink.holder.RandomHolder
+import id.co.ptn.tesesqgroup.models.SearchDrink
+import id.co.ptn.tesesqgroup.models.SearchDrinkType
+import id.co.ptn.tesesqgroup.ui.drink.holder.*
 
-class HomeDrinkAdapter(
-    private val items: MutableList<HomeDrink>,
-    private val listener: HomeDrinkListener) :
+class SearchDrinkAdapter(
+    private val items: MutableList<SearchDrink>,
+    private val listener: SearchDrinkListener) :
     RecyclerView.Adapter<BaseViewHolder<*>>() {
     companion object {
-        const val VIEW_POPULAR = 0
-        const val VIEW_DRINKS = 1
-        const val VIEW_RANDOM = 2
+        const val VIEW_RESULT = 0
+        const val VIEW_SUGGESTIONS = 1
     }
     private lateinit var context: Context
 
     override fun getItemViewType(position: Int): Int {
         return when (items[position].type) {
-            HomeDrinkType.POPULAR -> VIEW_POPULAR
-            HomeDrinkType.DRINKS -> VIEW_DRINKS
-            HomeDrinkType.RANDOM -> VIEW_RANDOM
+            SearchDrinkType.RESULT -> VIEW_RESULT
+            SearchDrinkType.SUGGESTIONS -> VIEW_SUGGESTIONS
             else -> throw IllegalArgumentException("Invalid type of data $position")
         }
     }
@@ -37,17 +35,13 @@ class HomeDrinkAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
         context = parent.context
         return when (viewType) {
-            VIEW_POPULAR -> {
+            VIEW_RESULT -> {
                 val binding: ContainerHomeItemDrinkBinding = DataBindingUtil.inflate( LayoutInflater.from(context), R.layout.container_home_item_drink, parent, false)
-                PopularHolder(binding)
+                SearchResultDrinksHolder(binding)
             }
-            VIEW_DRINKS -> {
+            VIEW_SUGGESTIONS -> {
                 val binding: ContainerHomeItemDrinkBinding = DataBindingUtil.inflate( LayoutInflater.from(context), R.layout.container_home_item_drink, parent, false)
-                DrinksHolder(binding)
-            }
-            VIEW_RANDOM -> {
-                val binding: ContainerHomeItemDrinkBinding = DataBindingUtil.inflate( LayoutInflater.from(context), R.layout.container_home_item_drink, parent, false)
-                RandomHolder(binding)
+                SuggestionsDrinkHolder(binding)
             }
             else -> throw IllegalArgumentException("Invalid view type")
         }
@@ -56,42 +50,23 @@ class HomeDrinkAdapter(
     override fun onBindViewHolder(holder: BaseViewHolder<*>, position: Int) {
         val element = items[position]
         when(holder) {
-            is PopularHolder -> {
-                holder.setView(context,object : HomeDrinkListener {
-                    override fun onMorePressed() {
-
-                    }
-
+            is SearchResultDrinksHolder -> {
+                holder.setView(context, object : SearchDrinkListener{
                     override fun onItemPressed() {
 
                     }
 
                 }, element)
             }
-            is DrinksHolder -> {
-                holder.setView(context,object : HomeDrinkListener {
-                    override fun onMorePressed() {
-
-                    }
-
+            is SuggestionsDrinkHolder -> {
+                holder.setView(context, object : SearchDrinkListener{
                     override fun onItemPressed() {
 
                     }
 
                 }, element)
             }
-            is RandomHolder -> {
-                holder.setView(context,object : HomeDrinkListener {
-                    override fun onMorePressed() {
 
-                    }
-
-                    override fun onItemPressed() {
-
-                    }
-
-                }, element)
-            }
         }
     }
 
@@ -99,8 +74,7 @@ class HomeDrinkAdapter(
         return items.size
     }
 
-    public interface HomeDrinkListener{
-        fun onMorePressed()
+    public interface SearchDrinkListener{
         fun onItemPressed()
     }
 

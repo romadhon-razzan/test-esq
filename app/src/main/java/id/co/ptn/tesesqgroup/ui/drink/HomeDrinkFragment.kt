@@ -1,5 +1,6 @@
 package id.co.ptn.tesesqgroup.ui.drink
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import id.co.ptn.tesesqgroup.bases.BaseFragment
 import id.co.ptn.tesesqgroup.databinding.HomeDrinkFragmentBinding
 import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.HomeDrink
+import id.co.ptn.tesesqgroup.models.HomeDrinkType
 import id.co.ptn.tesesqgroup.ui.drink.adapter.HomeDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.viewmodel.HomeDrinkViewModel
 import id.co.ptn.tesesqgroup.utils.Status
@@ -46,29 +48,30 @@ class HomeDrinkFragment : BaseFragment() {
     }
 
     private fun init() {
-        initSwipeRefresh()
+        initListener()
         initAdapter()
         setObserve()
         viewModel.apiGetPopular()
     }
 
-    private fun initSwipeRefresh() {
-        binding.refresh.setOnRefreshListener {
-            viewModel.apiGetPopular()
+    private fun initListener() {
+        binding.refresh.setOnRefreshListener { viewModel.apiGetPopular() }
+        binding.containerSearch.searchByName.setOnClickListener {
+            startActivity(Intent(context, SearchDrinkActivity::class.java))
         }
     }
 
     private fun initAdapter() {
-        homeDrinks.add(HomeDrink("Popular Drink","POPULAR", mutableListOf()))
-        homeDrinks.add(HomeDrink("Drinks", "DRINKS", mutableListOf()))
-        homeDrinks.add(HomeDrink("Random", "RANDOM", mutableListOf()))
+        homeDrinks.add(HomeDrink(getString(R.string.title_popular_drink), HomeDrinkType.POPULAR, mutableListOf()))
+        homeDrinks.add(HomeDrink(getString(R.string.title_drinks), HomeDrinkType.DRINKS, mutableListOf()))
+        homeDrinks.add(HomeDrink(getString(R.string.title_random), HomeDrinkType.RANDOM, mutableListOf()))
         homeDrinkAdapter = HomeDrinkAdapter(homeDrinks, object : HomeDrinkAdapter.HomeDrinkListener {
             override fun onMorePressed() {
-
+                showSnackBar(binding.container,"More Pressed")
             }
 
             override fun onItemPressed() {
-
+                showSnackBar(binding.container,"Item Pressed")
             }
         })
         binding.recyclerView.apply {
@@ -78,16 +81,18 @@ class HomeDrinkFragment : BaseFragment() {
         }
     }
 
+    private fun updateAdapterData(type: Int, data: MutableList<Drinks>? = mutableListOf()) {
+        homeDrinks[type].drinks.clear()
+        data?.let { homeDrinks[type].drinks = it }
+        homeDrinkAdapter?.notifyItemChanged(type)
+    }
+
     private fun setObserve() {
 
         viewModel.reqPopular().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    it.data?.let { d ->
-                        homeDrinks[ITEM_POPULAR].drinks.clear()
-                        homeDrinks[ITEM_POPULAR].drinks = d.drinks as MutableList<Drinks>
-                        homeDrinkAdapter?.notifyItemChanged(ITEM_POPULAR)
-                    }
+                    updateAdapterData(ITEM_POPULAR, it.data?.drinks as MutableList<Drinks>)
                     viewModel.apiGetCocktails()
                 }
                 Status.LOADING -> { }
@@ -100,12 +105,7 @@ class HomeDrinkFragment : BaseFragment() {
         viewModel.reqCocktail().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    it.data?.let { d ->
-                        homeDrinks[ITEM_DRINKS].drinks.clear()
-                        homeDrinks[ITEM_DRINKS].drinks = d.drinks as MutableList<Drinks>
-                        homeDrinkAdapter?.notifyItemChanged(ITEM_DRINKS)
-                    }
-
+                    updateAdapterData(ITEM_DRINKS, it.data?.drinks as MutableList<Drinks>)
                     viewModel.apiGetRandom()
                 }
                 Status.LOADING -> { }
@@ -118,9 +118,7 @@ class HomeDrinkFragment : BaseFragment() {
         viewModel.reqRandom().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    homeDrinks[ITEM_RANDOM].drinks.clear()
-                    homeDrinks[ITEM_RANDOM].drinks = it.data?.drinks as MutableList<Drinks>
-                    homeDrinkAdapter?.notifyItemChanged(ITEM_RANDOM)
+                    updateAdapterData(ITEM_RANDOM, it.data?.drinks as MutableList<Drinks>)
                     binding.refresh.isRefreshing = false
                 }
                 Status.LOADING -> {  }

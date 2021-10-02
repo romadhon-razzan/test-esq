@@ -2,4 +2,10 @@
     <string name="app_name">Tes ESQ Group</string>
     <string name="label_search_your_drink">Search your drink</string>
     <string name="label_more">More</string>
+    <string name="title_popular_drink">Popular Drink</string>
+    <string name="title_drinks">Drinks</string>
+    <string name="title_random">Random</string>
+    <string name="message_search_empty_result">The drink you are looking for is empty, try to find your other drink</string>
+    <string name="title_result">Result</string>
+    <string name="title_suggestions">Suggestions for you</string>
 </resources>

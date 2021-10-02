@@ -8,4 +8,6 @@ class ApiHelperImpl @Inject constructor(private val apiService: Services) : ApiH
     override suspend fun getCocktails(): Response<DrinkResponse> = apiService.getCocktails()
     override suspend fun getPopular(): Response<DrinkResponse> = apiService.getPopular()
     override suspend fun getRandom(): Response<DrinkResponse> = apiService.getRandom()
+    override suspend fun searchName(s: String): Response<DrinkResponse> = apiService.searchName(s)
+    override suspend fun getRecent(): Response<DrinkResponse> = apiService.getRecent()
 }
