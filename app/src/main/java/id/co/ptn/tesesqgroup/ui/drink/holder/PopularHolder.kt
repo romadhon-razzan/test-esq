@@ -9,12 +9,13 @@ import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.ui.drink.adapter.HomeDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemDrinkAdapter
+import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemPopularDrinkAdapter
 
 class PopularHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseViewHolder<MutableList<Drinks>>(binding.root) {
-    private lateinit var itemDrinkAdapter: ItemDrinkAdapter
+    private lateinit var itemPopularDrinkAdapter: ItemPopularDrinkAdapter
     fun setView(context: Context, listener: HomeDrinkAdapter.HomeDrinkListener, homeDrink: HomeDrink) {
         binding.lblTitle.text = homeDrink.title
-        binding.btMore.setOnClickListener { listener.onMorePressed() }
+        binding.btMore.visibility = View.GONE
         setAdapter(context, listener, homeDrink.drinks)
     }
 
@@ -22,7 +23,7 @@ class PopularHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseVi
         if (drinks.size > 0) binding.progressBar.visibility = View.GONE
         else binding.progressBar.visibility = View.VISIBLE
 
-        itemDrinkAdapter = ItemDrinkAdapter(drinks, object: ItemDrinkAdapter.ItemDrinkListener{
+        itemPopularDrinkAdapter = ItemPopularDrinkAdapter(drinks, object: ItemPopularDrinkAdapter.ItemDrinkListener{
             override fun onItemPressed(drink: Drinks) {
                 listener.onItemPressed()
             }
@@ -30,7 +31,7 @@ class PopularHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseVi
         binding.recyclerView.apply {
             hasFixedSize()
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
-            adapter = itemDrinkAdapter
+            adapter = itemPopularDrinkAdapter
         }
     }
 

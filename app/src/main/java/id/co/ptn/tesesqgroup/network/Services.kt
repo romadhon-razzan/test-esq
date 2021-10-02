@@ -8,6 +8,9 @@ interface Services {
     @GET(GET_COCKTAIL)
     suspend fun getCocktails(): Response<DrinkResponse>
 
+    @GET(GET_POPULAR)
+    suspend fun getPopular(): Response<DrinkResponse>
+
     @GET(GET_RANDOM)
     suspend fun getRandom(): Response<DrinkResponse>
 }

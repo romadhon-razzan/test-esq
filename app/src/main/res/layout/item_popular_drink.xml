@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
     <com.google.android.material.card.MaterialCardView
-        android:layout_width="@dimen/item_drink_size"
-        android:layout_height="@dimen/item_drink_size"
+        android:layout_width="300dp"
+        android:layout_height="@dimen/item_popular_drink_size"
         android:layout_marginEnd="@dimen/medium"
         app:cardCornerRadius="@dimen/radius_normal"
         app:cardElevation="@dimen/elevation_normal">
@@ -15,6 +15,7 @@
             <ImageView
                 android:id="@+id/image"
                 style="@style/LayoutMatchParent"
+                android:scaleType="centerCrop"
                 tools:src="@tools:sample/avatars"/>
 
             <View

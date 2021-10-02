@@ -21,7 +21,10 @@ import id.co.ptn.tesesqgroup.utils.Status
 class HomeDrinkFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() = HomeDrinkFragment()
+//        fun newInstance() = HomeDrinkFragment()
+        const val ITEM_POPULAR = 0
+        const val ITEM_DRINKS = 1
+        const val ITEM_RANDOM = 2
     }
 
     private lateinit var binding: HomeDrinkFragmentBinding
@@ -45,7 +48,7 @@ class HomeDrinkFragment : BaseFragment() {
     private fun init() {
         initAdapter()
         setObserve()
-        viewModel.apiGetCocktails()
+        viewModel.apiGetPopular()
     }
 
     private fun initAdapter() {
@@ -69,20 +72,34 @@ class HomeDrinkFragment : BaseFragment() {
     }
 
     private fun setObserve() {
+
+        viewModel.reqPopular().observe(viewLifecycleOwner, {
+            when (it.status) {
+                Status.SUCCESS -> {
+                    it.data?.let { d ->
+                        homeDrinks[ITEM_POPULAR].drinks = d.drinks as MutableList<Drinks>
+                        homeDrinkAdapter?.notifyItemChanged(0)
+                    }
+                    viewModel.apiGetCocktails()
+                }
+                Status.LOADING -> { }
+                Status.ERROR -> {
+                    showSnackBar(binding.container,"Error Apps")
+                }
+            }
+        })
+
         viewModel.reqCocktail().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    homeDrinks[0].drinks = it.data?.drinks as MutableList<Drinks>
-                    homeDrinkAdapter?.notifyItemChanged(0)
-
-                    homeDrinks[1].drinks = it.data?.drinks as MutableList<Drinks>
-                    homeDrinkAdapter?.notifyItemChanged(1)
+                    it.data?.let { d ->
+                        homeDrinks[ITEM_DRINKS].drinks = d.drinks as MutableList<Drinks>
+                        homeDrinkAdapter?.notifyItemChanged(1)
+                    }
 
                     viewModel.apiGetRandom()
                 }
-                Status.LOADING -> {
-
-                }
+                Status.LOADING -> { }
                 Status.ERROR -> {
                     showSnackBar(binding.container,"Error Apps")
                 }
@@ -92,12 +109,10 @@ class HomeDrinkFragment : BaseFragment() {
         viewModel.reqRandom().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
-                    homeDrinks[2].drinks = it.data?.drinks as MutableList<Drinks>
+                    homeDrinks[ITEM_RANDOM].drinks = it.data?.drinks as MutableList<Drinks>
                     homeDrinkAdapter?.notifyItemChanged(2)
                 }
-                Status.LOADING -> {
-
-                }
+                Status.LOADING -> { }
                 Status.ERROR -> {
                     showSnackBar(binding.container,"Error Apps")
                 }

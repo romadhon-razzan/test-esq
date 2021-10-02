@@ -6,5 +6,6 @@ import javax.inject.Inject
 
 class ApiHelperImpl @Inject constructor(private val apiService: Services) : ApiHelper {
     override suspend fun getCocktails(): Response<DrinkResponse> = apiService.getCocktails()
+    override suspend fun getPopular(): Response<DrinkResponse> = apiService.getPopular()
     override suspend fun getRandom(): Response<DrinkResponse> = apiService.getRandom()
 }

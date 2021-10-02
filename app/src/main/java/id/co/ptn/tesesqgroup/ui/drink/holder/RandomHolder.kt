@@ -14,7 +14,7 @@ class RandomHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseVie
     private lateinit var itemDrinkHorizontalAdapter: ItemDrinkHorizontalAdapter
     fun setView(context: Context, listener: HomeDrinkAdapter.HomeDrinkListener, homeDrink: HomeDrink) {
         binding.lblTitle.text = homeDrink.title
-        binding.btMore.setOnClickListener { listener.onMorePressed() }
+        binding.btMore.visibility = View.GONE
         setAdapter(context, listener, homeDrink.drinks)
     }
 
