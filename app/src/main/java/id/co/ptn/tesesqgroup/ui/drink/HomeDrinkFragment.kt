@@ -46,9 +46,16 @@ class HomeDrinkFragment : BaseFragment() {
     }
 
     private fun init() {
+        initSwipeRefresh()
         initAdapter()
         setObserve()
         viewModel.apiGetPopular()
+    }
+
+    private fun initSwipeRefresh() {
+        binding.refresh.setOnRefreshListener {
+            viewModel.apiGetPopular()
+        }
     }
 
     private fun initAdapter() {
@@ -77,8 +84,9 @@ class HomeDrinkFragment : BaseFragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { d ->
+                        homeDrinks[ITEM_POPULAR].drinks.clear()
                         homeDrinks[ITEM_POPULAR].drinks = d.drinks as MutableList<Drinks>
-                        homeDrinkAdapter?.notifyItemChanged(0)
+                        homeDrinkAdapter?.notifyItemChanged(ITEM_POPULAR)
                     }
                     viewModel.apiGetCocktails()
                 }
@@ -93,8 +101,9 @@ class HomeDrinkFragment : BaseFragment() {
             when (it.status) {
                 Status.SUCCESS -> {
                     it.data?.let { d ->
+                        homeDrinks[ITEM_DRINKS].drinks.clear()
                         homeDrinks[ITEM_DRINKS].drinks = d.drinks as MutableList<Drinks>
-                        homeDrinkAdapter?.notifyItemChanged(1)
+                        homeDrinkAdapter?.notifyItemChanged(ITEM_DRINKS)
                     }
 
                     viewModel.apiGetRandom()
@@ -109,10 +118,12 @@ class HomeDrinkFragment : BaseFragment() {
         viewModel.reqRandom().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
+                    homeDrinks[ITEM_RANDOM].drinks.clear()
                     homeDrinks[ITEM_RANDOM].drinks = it.data?.drinks as MutableList<Drinks>
-                    homeDrinkAdapter?.notifyItemChanged(2)
+                    homeDrinkAdapter?.notifyItemChanged(ITEM_RANDOM)
+                    binding.refresh.isRefreshing = false
                 }
-                Status.LOADING -> { }
+                Status.LOADING -> {  }
                 Status.ERROR -> {
                     showSnackBar(binding.container,"Error Apps")
                 }

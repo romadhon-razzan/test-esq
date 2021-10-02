@@ -11,11 +11,16 @@
             android:id="@+id/container_search"
             layout="@layout/container_search"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_view"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/refresh"
             android:layout_below="@+id/container_search"
-            style="@style/LayoutMatchParentWrapContent"
-            tools:listitem="@layout/container_home_item_drink"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view"
+                style="@style/LayoutMatchParentWrapContent"
+                tools:listitem="@layout/container_home_item_drink"/>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </RelativeLayout>
 </layout>
