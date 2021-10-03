@@ -72,7 +72,7 @@ class HomeDrinkAdapter(
             is DrinksHolder -> {
                 holder.setView(context,object : HomeDrinkListener {
                     override fun onMorePressed() {
-
+                        listener.onMorePressed()
                     }
 
                     override fun onItemPressed(drinks: Drinks) {

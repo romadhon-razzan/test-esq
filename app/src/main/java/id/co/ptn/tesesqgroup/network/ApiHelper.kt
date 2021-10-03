@@ -4,7 +4,7 @@ import id.co.ptn.tesesqgroup.models.*
 import retrofit2.Response
 
 interface ApiHelper {
-    suspend fun getCocktails(): Response<DrinkResponse>
+    suspend fun getDrinkByFirstLetter(s: String): Response<DrinkResponse>
     suspend fun getPopular(): Response<DrinkResponse>
     suspend fun getRandom(): Response<DrinkResponse>
     suspend fun searchName(s: String): Response<DrinkResponse>

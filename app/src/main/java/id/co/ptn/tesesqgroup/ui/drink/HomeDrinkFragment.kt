@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseFragment
@@ -68,7 +67,7 @@ class HomeDrinkFragment : BaseFragment() {
         homeDrinks.add(HomeDrink(getString(R.string.title_random), HomeDrinkType.RANDOM, mutableListOf()))
         homeDrinkAdapter = HomeDrinkAdapter(homeDrinks, object : HomeDrinkAdapter.HomeDrinkListener {
             override fun onMorePressed() {
-                showSnackBar(binding.container,"More Pressed")
+                toMoreDrink()
             }
 
             override fun onItemPressed(drinks: Drinks) {
@@ -94,13 +93,17 @@ class HomeDrinkFragment : BaseFragment() {
         startActivity(intent)
     }
 
+    private fun toMoreDrink() {
+        startActivity(Intent(context, DrinksActivity::class.java))
+    }
+
     private fun setObserve() {
 
         viewModel.reqPopular().observe(viewLifecycleOwner, {
             when (it.status) {
                 Status.SUCCESS -> {
                     updateAdapterData(ITEM_POPULAR, it.data?.drinks as MutableList<Drinks>)
-                    viewModel.apiGetCocktails()
+                    viewModel.apiGetRecent()
                 }
                 Status.LOADING -> { }
                 Status.ERROR -> {

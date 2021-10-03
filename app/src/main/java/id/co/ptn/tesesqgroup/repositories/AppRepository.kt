@@ -4,6 +4,7 @@ import id.co.ptn.tesesqgroup.network.ApiHelper
 import javax.inject.Inject
 
 class AppRepository @Inject constructor(private val apiHelper: ApiHelper) {
+    suspend fun getDrinkByFirstLetter(s: String) =  apiHelper.getDrinkByFirstLetter(s)
     suspend fun getPopular() =  apiHelper.getPopular()
     suspend fun getRandom() =  apiHelper.getRandom()
     suspend fun searchName(s: String) =  apiHelper.searchName(s)

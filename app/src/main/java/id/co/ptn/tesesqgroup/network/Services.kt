@@ -5,8 +5,8 @@ import retrofit2.Response
 import retrofit2.http.*
 
 interface Services {
-    @GET(GET_COCKTAIL)
-    suspend fun getCocktails(): Response<DrinkResponse>
+    @GET(GET_DRINK_BY_FIRST_LETTER)
+    suspend fun getDrinkByFirstLetter(@Query("f") s: String): Response<DrinkResponse>
 
     @GET(GET_POPULAR)
     suspend fun getPopular(): Response<DrinkResponse>
