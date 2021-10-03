@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">Tes ESQ Group</string>
+    <string name="label_search_your_drink">Search your drink</string>
+    <string name="label_more">More</string>
+    <string name="title_popular_drink">Popular Drink</string>
+    <string name="title_drinks">Drinks</string>
+    <string name="title_random">Random</string>
+    <string name="message_search_empty_result">The drink you are looking for is empty, try to find your other drink</string>
+    <string name="title_result">Result</string>
+    <string name="title_suggestions">Suggestions for you</string>
+    <string name="title_filter">Filter</string>
+    <string name="button_apply">Apply</string>
+    <string name="label_by_category">By category</string>
+    <string name="label_by_glass">By glass</string>
+    <string name="label_by_ingredient">By ingredient</string>
+    <string name="label_by_alcoholic">By alcoholic</string>
+    <string name="label_instruction">Instruction</string>
+    <string name="label_glass">Glass</string>
+    <string name="title_detail">Detail</string>
 </resources>
