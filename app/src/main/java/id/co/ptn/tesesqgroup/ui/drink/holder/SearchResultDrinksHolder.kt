@@ -29,7 +29,7 @@ class SearchResultDrinksHolder(private val binding: ContainerHomeItemDrinkBindin
 
         itemDrinkHorizontalAdapter = ItemDrinkHorizontalAdapter(drinks, object: ItemDrinkHorizontalAdapter.ItemDrinkListener{
             override fun onItemPressed(drink: Drinks) {
-                listener.onItemPressed()
+                listener.onItemPressed(drink)
             }
         } )
         binding.recyclerView.apply {

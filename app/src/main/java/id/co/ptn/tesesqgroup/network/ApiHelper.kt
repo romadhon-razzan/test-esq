@@ -8,6 +8,7 @@ interface ApiHelper {
     suspend fun getPopular(): Response<DrinkResponse>
     suspend fun getRandom(): Response<DrinkResponse>
     suspend fun searchName(s: String): Response<DrinkResponse>
+    suspend fun detail(s: String): Response<DrinkResponse>
     suspend fun getRecent(): Response<DrinkResponse>
     suspend fun getCategories(): Response<CategoryResponse>
     suspend fun getGlasses(): Response<GlassesResponse>

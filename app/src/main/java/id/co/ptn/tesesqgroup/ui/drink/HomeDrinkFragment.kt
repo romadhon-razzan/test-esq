@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
 import dagger.hilt.android.AndroidEntryPoint
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseFragment
@@ -70,8 +71,8 @@ class HomeDrinkFragment : BaseFragment() {
                 showSnackBar(binding.container,"More Pressed")
             }
 
-            override fun onItemPressed() {
-                showSnackBar(binding.container,"Item Pressed")
+            override fun onItemPressed(drinks: Drinks) {
+                toDrinkDetail(drinks)
             }
         })
         binding.recyclerView.apply {
@@ -85,6 +86,12 @@ class HomeDrinkFragment : BaseFragment() {
         homeDrinks[type].drinks.clear()
         data?.let { homeDrinks[type].drinks = it }
         homeDrinkAdapter?.notifyItemChanged(type)
+    }
+
+    private fun toDrinkDetail(drinks: Drinks) {
+        val intent = Intent(context, DrinkDetailActivity::class.java)
+        intent.putExtra("id", drinks.idDrink)
+        startActivity(intent)
     }
 
     private fun setObserve() {
