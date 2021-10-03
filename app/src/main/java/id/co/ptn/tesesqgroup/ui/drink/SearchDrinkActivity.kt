@@ -23,7 +23,6 @@ import id.co.ptn.tesesqgroup.databinding.ActivitySearchDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.SearchDrink
 import id.co.ptn.tesesqgroup.models.SearchDrinkType
-import id.co.ptn.tesesqgroup.network.FILTER
 import id.co.ptn.tesesqgroup.ui.drink.adapter.SearchDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.filter.FilterDrinkActivity
 import id.co.ptn.tesesqgroup.ui.drink.viewmodel.SearchDrinkViewModel
@@ -87,8 +86,8 @@ class SearchDrinkActivity : BaseActivity() {
         searchDrinks.add(SearchDrink(getString(R.string.title_result), SearchDrinkType.RESULT ,mutableListOf()))
         searchDrinks.add(SearchDrink(getString(R.string.title_suggestions), SearchDrinkType.SUGGESTIONS ,mutableListOf()))
         searchDrinkAdapter = SearchDrinkAdapter(searchDrinks, object : SearchDrinkAdapter.SearchDrinkListener {
-            override fun onItemPressed() {
-
+            override fun onItemPressed(drink: Drinks) {
+                toDrinkDetail(drink)
             }
         })
         binding.recyclerView.apply {
@@ -111,6 +110,12 @@ class SearchDrinkActivity : BaseActivity() {
     private fun toFilter() {
         val intent = Intent(this, FilterDrinkActivity::class.java)
         resultLauncher.launch(intent)
+    }
+
+    private fun toDrinkDetail(drinks: Drinks) {
+        val intent = Intent(this, DrinkDetailActivity::class.java)
+        intent.putExtra("id", drinks.idDrink)
+        startActivity(intent)
     }
 
     private fun setObserve() {
@@ -149,7 +154,7 @@ class SearchDrinkActivity : BaseActivity() {
         if (result.resultCode == APPLY_FILTER) {
             val data: Intent? = result.data
             data?.let {
-                var query: MutableMap<String, String>? = HashMap()
+                val query: MutableMap<String, String>?
                 val type = object: TypeToken<Map<String, String>>(){}.type
                 query = Gson().fromJson(it.getStringExtra("filter"), type)
                 query?.let { q -> viewModel.apiFilter(q) }

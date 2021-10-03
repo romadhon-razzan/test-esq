@@ -14,4 +14,7 @@
     <string name="label_by_glass">By glass</string>
     <string name="label_by_ingredient">By ingredient</string>
     <string name="label_by_alcoholic">By alcoholic</string>
+    <string name="label_instruction">Instruction</string>
+    <string name="label_glass">Glass</string>
+    <string name="title_detail">Detail</string>
 </resources>

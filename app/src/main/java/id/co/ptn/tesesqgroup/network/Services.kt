@@ -17,6 +17,9 @@ interface Services {
     @GET(SEARCH_NAME)
     suspend fun searchName( @Query("s") s: String): Response<DrinkResponse>
 
+    @GET(GET_DETAIL)
+    suspend fun detail( @Query("i") s: String): Response<DrinkResponse>
+
     @GET(GET_RECENT)
     suspend fun getRecent(): Response<DrinkResponse>
 

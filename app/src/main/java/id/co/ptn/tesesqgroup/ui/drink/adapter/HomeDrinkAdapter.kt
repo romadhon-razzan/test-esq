@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
+import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.models.HomeDrinkType
 import id.co.ptn.tesesqgroup.ui.drink.holder.DrinksHolder
@@ -62,8 +63,8 @@ class HomeDrinkAdapter(
 
                     }
 
-                    override fun onItemPressed() {
-
+                    override fun onItemPressed(drinks: Drinks) {
+                        listener.onItemPressed(drinks)
                     }
 
                 }, element)
@@ -74,8 +75,8 @@ class HomeDrinkAdapter(
 
                     }
 
-                    override fun onItemPressed() {
-
+                    override fun onItemPressed(drinks: Drinks) {
+                        listener.onItemPressed(drinks)
                     }
 
                 }, element)
@@ -86,8 +87,8 @@ class HomeDrinkAdapter(
 
                     }
 
-                    override fun onItemPressed() {
-
+                    override fun onItemPressed(drinks: Drinks) {
+                        listener.onItemPressed(drinks)
                     }
 
                 }, element)
@@ -101,7 +102,7 @@ class HomeDrinkAdapter(
 
     public interface HomeDrinkListener{
         fun onMorePressed()
-        fun onItemPressed()
+        fun onItemPressed(drinks: Drinks)
     }
 
 }

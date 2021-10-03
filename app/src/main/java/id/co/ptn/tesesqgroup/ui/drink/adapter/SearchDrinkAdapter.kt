@@ -8,10 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
-import id.co.ptn.tesesqgroup.models.HomeDrink
-import id.co.ptn.tesesqgroup.models.HomeDrinkType
-import id.co.ptn.tesesqgroup.models.SearchDrink
-import id.co.ptn.tesesqgroup.models.SearchDrinkType
+import id.co.ptn.tesesqgroup.models.*
 import id.co.ptn.tesesqgroup.ui.drink.holder.*
 
 class SearchDrinkAdapter(
@@ -52,16 +49,16 @@ class SearchDrinkAdapter(
         when(holder) {
             is SearchResultDrinksHolder -> {
                 holder.setView(context, object : SearchDrinkListener{
-                    override fun onItemPressed() {
-
+                    override fun onItemPressed(drink: Drinks) {
+                        listener.onItemPressed(drink)
                     }
 
                 }, element)
             }
             is SuggestionsDrinkHolder -> {
                 holder.setView(context, object : SearchDrinkListener{
-                    override fun onItemPressed() {
-
+                    override fun onItemPressed(drink: Drinks) {
+                        listener.onItemPressed(drink)
                     }
 
                 }, element)
@@ -75,7 +72,7 @@ class SearchDrinkAdapter(
     }
 
     public interface SearchDrinkListener{
-        fun onItemPressed()
+        fun onItemPressed(drink: Drinks)
     }
 
 }

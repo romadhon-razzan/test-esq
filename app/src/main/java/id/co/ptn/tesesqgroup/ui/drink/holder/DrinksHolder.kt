@@ -24,7 +24,7 @@ class DrinksHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseVie
 
         itemDrinkAdapter = ItemDrinkAdapter(drinks, object: ItemDrinkAdapter.ItemDrinkListener{
             override fun onItemPressed(drink: Drinks) {
-                listener.onItemPressed()
+                listener.onItemPressed(drink)
             }
         } )
         binding.recyclerView.apply {

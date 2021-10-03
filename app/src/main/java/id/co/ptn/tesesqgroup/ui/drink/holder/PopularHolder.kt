@@ -24,7 +24,7 @@ class PopularHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseVi
 
         itemPopularDrinkAdapter = ItemPopularDrinkAdapter(drinks, object: ItemPopularDrinkAdapter.ItemDrinkListener{
             override fun onItemPressed(drink: Drinks) {
-                listener.onItemPressed()
+                listener.onItemPressed(drink)
             }
         } )
         binding.recyclerView.apply {
