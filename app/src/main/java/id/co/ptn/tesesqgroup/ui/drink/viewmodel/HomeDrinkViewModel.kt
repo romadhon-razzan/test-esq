@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import id.co.ptn.tesesqgroup.models.DrinkResponse
-import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.repositories.AppRepository
 import id.co.ptn.tesesqgroup.utils.Resource
 import kotlinx.coroutines.launch
@@ -15,39 +14,20 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeDrinkViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
     private var _reqPopularResponse: MutableLiveData<Resource<DrinkResponse>> = MutableLiveData()
-
     fun reqPopular(): MutableLiveData<Resource<DrinkResponse>> = _reqPopularResponse
 
     private var _reqDrinkResponse: MutableLiveData<Resource<DrinkResponse>> = MutableLiveData()
-
     fun reqCocktail(): MutableLiveData<Resource<DrinkResponse>> = _reqDrinkResponse
 
     private var _reqRandomResponse: MutableLiveData<Resource<DrinkResponse>> = MutableLiveData()
-
     fun reqRandom(): MutableLiveData<Resource<DrinkResponse>> = _reqRandomResponse
-
-    fun getPopularDrink(data: MutableList<Drinks>) : MutableList<Drinks> {
-        val values = mutableListOf<Drinks>()
-        data.forEachIndexed { index, drinks ->
-            if (index % 2 == 1) values.add(drinks)
-        }
-        return values
-    }
-
-    fun getRandomDrink(data: MutableList<Drinks>) : List<Drinks> {
-        val values = mutableListOf<Drinks>()
-        data.forEachIndexed { index, drinks ->
-            if (index % 2 == 1) values[index] = drinks
-        }
-        return values.sortedBy { it.strDrink }
-    }
 
     /** Api */
     fun apiGetCocktails() {
         viewModelScope.launch {
             try {
                 _reqDrinkResponse.postValue(Resource.loading(null))
-                repository.getCocktails().let {
+                repository.getRecent().let {
                     if (it.isSuccessful) {
                         _reqDrinkResponse.postValue(Resource.success(it.body()))
                     } else _reqDrinkResponse.postValue(Resource.error(it.errorBody().toString(), null))

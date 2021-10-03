@@ -3,7 +3,6 @@ package id.co.ptn.tesesqgroup.ui.drink.holder
 import android.content.Context
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks

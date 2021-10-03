@@ -14,12 +14,11 @@ import javax.inject.Inject
 @HiltViewModel
 class SearchDrinkViewModel @Inject constructor(private val repository: AppRepository) : ViewModel() {
     private var _reqSearchResponse: MutableLiveData<Resource<DrinkResponse>> = MutableLiveData()
-
     fun reqSearch(): MutableLiveData<Resource<DrinkResponse>> = _reqSearchResponse
 
     private var _reqSuggestionsResponse: MutableLiveData<Resource<DrinkResponse>> = MutableLiveData()
-
     fun reqSuggestions(): MutableLiveData<Resource<DrinkResponse>> = _reqSuggestionsResponse
+
 
     /** Api */
     fun apiSearchName(s: String) {
@@ -45,6 +44,21 @@ class SearchDrinkViewModel @Inject constructor(private val repository: AppReposi
                     if (it.isSuccessful) {
                         _reqSuggestionsResponse.postValue(Resource.success(it.body()))
                     } else _reqSuggestionsResponse.postValue(Resource.error(it.errorBody().toString(), null))
+                }
+            } catch (e: Exception) {
+                Log.e("NETWORK ERROR", e.printStackTrace().toString())
+            }
+        }
+    }
+
+    fun apiFilter(params: Map<String, String>) {
+        viewModelScope.launch {
+            try {
+                _reqSearchResponse.postValue(Resource.loading(null))
+                repository.filter(params).let {
+                    if (it.isSuccessful) {
+                        _reqSearchResponse.postValue(Resource.success(it.body()))
+                    } else _reqSearchResponse.postValue(Resource.error(it.errorBody().toString(), null))
                 }
             } catch (e: Exception) {
                 Log.e("NETWORK ERROR", e.printStackTrace().toString())

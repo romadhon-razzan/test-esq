@@ -8,4 +8,10 @@
     <string name="message_search_empty_result">The drink you are looking for is empty, try to find your other drink</string>
     <string name="title_result">Result</string>
     <string name="title_suggestions">Suggestions for you</string>
+    <string name="title_filter">Filter</string>
+    <string name="button_apply">Apply</string>
+    <string name="label_by_category">By category</string>
+    <string name="label_by_glass">By glass</string>
+    <string name="label_by_ingredient">By ingredient</string>
+    <string name="label_by_alcoholic">By alcoholic</string>
 </resources>

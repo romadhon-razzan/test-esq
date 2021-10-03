@@ -2,16 +2,11 @@ package id.co.ptn.tesesqgroup.ui.drink.holder
 
 import android.content.Context
 import android.view.View
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
-import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.models.SearchDrink
-import id.co.ptn.tesesqgroup.ui.drink.adapter.HomeDrinkAdapter
-import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemDrinkHorizontalAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.SearchDrinkAdapter
 

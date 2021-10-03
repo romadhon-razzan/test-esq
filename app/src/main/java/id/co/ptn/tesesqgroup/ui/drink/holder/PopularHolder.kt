@@ -8,7 +8,6 @@ import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.ui.drink.adapter.HomeDrinkAdapter
-import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemPopularDrinkAdapter
 
 class PopularHolder(private val binding: ContainerHomeItemDrinkBinding) : BaseViewHolder<MutableList<Drinks>>(binding.root) {

@@ -7,7 +7,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import id.co.ptn.tesesqgroup.R
-import id.co.ptn.tesesqgroup.databinding.ItemDrinkBinding
 import id.co.ptn.tesesqgroup.databinding.ItemPopularDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
 

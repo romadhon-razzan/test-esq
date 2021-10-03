@@ -1,6 +1,7 @@
 package id.co.ptn.tesesqgroup.ui.drink
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,17 +9,23 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import dagger.hilt.android.AndroidEntryPoint
 import id.co.ptn.tesesqgroup.R
 import id.co.ptn.tesesqgroup.bases.BaseActivity
+import id.co.ptn.tesesqgroup.config.APPLY_FILTER
 import id.co.ptn.tesesqgroup.databinding.ActivitySearchDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
 import id.co.ptn.tesesqgroup.models.SearchDrink
 import id.co.ptn.tesesqgroup.models.SearchDrinkType
+import id.co.ptn.tesesqgroup.network.FILTER
 import id.co.ptn.tesesqgroup.ui.drink.adapter.SearchDrinkAdapter
+import id.co.ptn.tesesqgroup.ui.drink.filter.FilterDrinkActivity
 import id.co.ptn.tesesqgroup.ui.drink.viewmodel.SearchDrinkViewModel
 import id.co.ptn.tesesqgroup.utils.Status
 
@@ -51,7 +58,7 @@ class SearchDrinkActivity : BaseActivity() {
 
     private fun initListener() {
         binding.toolbar.btBack.setOnClickListener { onBackPressed() }
-        binding.toolbar.btFilter.setOnClickListener {  }
+        binding.toolbar.btFilter.setOnClickListener { toFilter() }
     }
 
     private fun initSearch() {
@@ -101,6 +108,11 @@ class SearchDrinkActivity : BaseActivity() {
         binding.empty.container.visibility = View.GONE
     }
 
+    private fun toFilter() {
+        val intent = Intent(this, FilterDrinkActivity::class.java)
+        resultLauncher.launch(intent)
+    }
+
     private fun setObserve() {
         viewModel.reqSearch().observe(this, {
             when (it.status) {
@@ -132,4 +144,17 @@ class SearchDrinkActivity : BaseActivity() {
             }
         })
     }
+
+    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == APPLY_FILTER) {
+            val data: Intent? = result.data
+            data?.let {
+                var query: MutableMap<String, String>? = HashMap()
+                val type = object: TypeToken<Map<String, String>>(){}.type
+                query = Gson().fromJson(it.getStringExtra("filter"), type)
+                query?.let { q -> viewModel.apiFilter(q) }
+            }
+        }
+    }
+
 }

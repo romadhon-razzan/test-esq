@@ -6,9 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import id.co.ptn.tesesqgroup.bases.BaseViewHolder
 import id.co.ptn.tesesqgroup.databinding.ContainerHomeItemDrinkBinding
 import id.co.ptn.tesesqgroup.models.Drinks
-import id.co.ptn.tesesqgroup.models.HomeDrink
 import id.co.ptn.tesesqgroup.models.SearchDrink
-import id.co.ptn.tesesqgroup.ui.drink.adapter.HomeDrinkAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.ItemDrinkHorizontalAdapter
 import id.co.ptn.tesesqgroup.ui.drink.adapter.SearchDrinkAdapter
 
